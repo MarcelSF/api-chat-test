@@ -12,12 +12,23 @@ gem 'puma', '~> 3.11'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
+
+# Factory bot
+gem 'factory_bot'
+# Pry
+gem 'pry', '~> 0.12.2'
+
+# User authentication with Devise
+gem 'devise'
+
+# Serializer
+gem 'active_model_serializers', '~> 0.10.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -26,11 +37,18 @@ gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'railroady'
+  gem 'rspec-rails', '~> 3.8'
+
+  gem 'rubocop', '0.65.0'
+  gem 'rubocop-performance'
+  gem 'rubocop-rspec', '1.32.0'
 end
 
 group :development do
@@ -40,6 +58,10 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :test do
+  gem 'database_cleaner', '1.7.0'
+  gem 'faker', '1.9.3'
+end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
