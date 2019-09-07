@@ -13,7 +13,7 @@ class Api::V1::MessagesController < ApplicationController
 
       reply = Reply.new(message_params.except(:text))
       reply.locale_key = message.detected_language
-      broadcast(reply) if reply.save
+      broadcast_reply(reply) if reply.save
     else
       render :json => {error: { "code": 422,
       "message": "Unfortunately we don't have support for your language yet." }}, :status => 422
@@ -22,7 +22,7 @@ class Api::V1::MessagesController < ApplicationController
 
   private
 
-  def broadcast(message)
+  def broadcast_reply(message)
     serialized_data = ActiveModelSerializers::Adapter::Json.new(
       ReplySerializer.new(message)
     ).serializable_hash
