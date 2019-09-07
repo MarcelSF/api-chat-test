@@ -1,40 +1,32 @@
 class Api::V1::MessagesController < ApplicationController
-
   def create
-    message = Message.new(message_params.except(:text))
-    session = Session.find(message_params[:session_id])
-    message.identifier = generate_token
-    message.detected_language = language_detection(message_params[:text])
+    @message = Message.new(message_params.except(:text))
+    @session = Session.find(message_params[:session_id])
+    @message.set_identifier
+    @message.detected_language = language_detection(message_params[:text])
 
-    if message.save
-      serialized_data = ActiveModelSerializers::Adapter::Json.new(
-        MessageSerializer.new(message)
-      ).serializable_hash
-      MessagesChannel.broadcast_to session, serialized_data
-      head :ok
-
-      reply = Reply.new(message_params.except(:text))
-      reply.locale_key = message.detected_language
-      reply.reply_to = message.identifier
-      broadcast_reply(reply) if reply.save
+    if @message.save
+      @message.broadcast_message(@session)
+      @reply = Reply.new(message_params.except(:text))
+      @reply.locale_key = @message.detected_language
+      @reply.reply_to = @message.identifier
+      broadcast_reply(@reply) if @reply.save
     else
       render :json => {error: { "code": 422,
       "message": "Unfortunately we don't have support for your language yet." }}, :status => 422
     end
   end
 
-  private
-
-  def set_identifier
-    self.identifier = generate_token
-  end
-
-  def generate_token
-    loop do
-      token = SecureRandom.hex(10)
-      break token unless Message.where(identifier: token).exists?
+  def show
+    if @message = Message.find_by_identifier(params[:id])
+      render json: @message
+    else
+      render :json => {error: { "code": 404,
+      "message": "Resource doesn't exist" }}, :status => 404
     end
   end
+
+  private
 
   def broadcast_reply(message)
     serialized_data = ActiveModelSerializers::Adapter::Json.new(

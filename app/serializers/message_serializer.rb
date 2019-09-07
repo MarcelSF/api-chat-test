@@ -1,3 +1,3 @@
 class MessageSerializer < ActiveModel::Serializer
-  attributes :id, :identifier, :detected_language, :session_id, :created_at
+  attributes :identifier, :detected_language, :created_at
 end
