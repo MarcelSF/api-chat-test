@@ -11,9 +11,9 @@ class Message < ApplicationRecord
       MessagesChannel.broadcast_to session, serialized_data
   end
 
-  def language_detection
-    self.detected_language = CLD.detect_language(self.text)
-    language[:code]
+  def detect_language
+    self.detected_language = CLD.detect_language(self.text)[:code]
+    self.text = ""
   end
 
   def set_identifier
