@@ -14,7 +14,7 @@ class Api::V1::MessagesController < ApplicationController
       @reply = Reply.new
       @reply.build_reply(@message, @session)
       @reply.save
-      render :json => { "message": @message}, :status => 201
+      render json: @message, :status => 201
 
     else
       render :json => {error: { "code": 422,

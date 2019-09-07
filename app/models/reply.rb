@@ -15,6 +15,8 @@ class Reply < ApplicationRecord
   }
 
   belongs_to :session
+  validates :reply_to, presence: true
+  validates :session_id, presence: true
 
   def build_reply(message, session)
     message == session.messages.first ? (message_code = :salutation) : (message_code = :after_salutation)
