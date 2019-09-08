@@ -2,13 +2,22 @@ class Message < ApplicationRecord
   LANGUAGES = ['en', 'es', 'de']
 
   belongs_to :session
+  validate :text_must_be_blank
+  validates :identifier, presence: true, uniqueness: true
+  validates :session, presence: true
   validates :detected_language, presence: true, inclusion: { in: LANGUAGES }
 
   def broadcast_message(session)
     serialized_data = ActiveModelSerializers::Adapter::Json.new(
       MessageSerializer.new(self)
-      ).serializable_hash
-      MessagesChannel.broadcast_to session, serialized_data
+    ).serializable_hash
+    MessagesChannel.broadcast_to session, serialized_data
+  end
+
+  def text_must_be_blank
+    if text != ""
+      errors.add(:message, "Text must be blank")
+    end
   end
 
   def detect_language

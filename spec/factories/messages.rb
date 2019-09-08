@@ -3,6 +3,6 @@ FactoryBot.define do
     association :session, factory: :session, strategy: :build
     identifier { 123 }
     detected_language { "en" }
-    text {"An example of English"}
+    text {""}
   end
 end
