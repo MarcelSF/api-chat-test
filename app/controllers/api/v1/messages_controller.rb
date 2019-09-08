@@ -23,7 +23,12 @@ class Api::V1::MessagesController < ApplicationController
 
   def show
     if @message = Message.find_by_identifier(params[:id])
-      render json: @message, status: 200
+      if @message.session_id == params[:session_id].to_i
+        render json: @message, status: 200
+      else
+        render :json => {error: { "code": 404,
+        "message": "Resource doesn't exist" }}, :status => 404
+      end
     else
       render :json => {error: { "code": 404,
       "message": "Resource doesn't exist" }}, :status => 404

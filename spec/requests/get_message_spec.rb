@@ -29,6 +29,13 @@ context 'Getting Messages with Identifier' do
   end
 
   describe "Get Message from a session with identifier - ERROR", :type => :request do
+    def generate_token
+      loop do
+        token = SecureRandom.hex(8)
+        break token unless Message.where(identifier: token).exists?
+      end
+    end
+
     def set_host (host)
       host! host
     end
@@ -38,11 +45,11 @@ context 'Getting Messages with Identifier' do
     end
 
     before do
-      @identifier = 123
+      @identifier = generate_token
       get "api/v1/sessions/3/messages/#{@identifier}"
     end
 
-    it 'returns the correct message' do
+    it 'returns the correct error message' do
       expect(JSON.parse(response.body)["error"]["message"]).to eq("Resource doesn't exist")
     end
 
