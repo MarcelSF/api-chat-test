@@ -34,7 +34,7 @@ class Api::V1::MessagesController < ApplicationController
       "message": "Resource doesn't exist" }}, :status => 404
     end
   end
-
+wuhiuwh
   private
 
   def broadcast_reply(message)
