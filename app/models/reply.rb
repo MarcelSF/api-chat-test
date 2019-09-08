@@ -14,9 +14,13 @@ class Reply < ApplicationRecord
     }
   }
 
+  CODES = ["de.salutation", "de.after_salutation", "en.salutation", "en.after_salutation", "es.salutation", "es.after_salutation"]
+
   belongs_to :session
+  validates :message, presence: true
   validates :reply_to, presence: true
-  validates :session_id, presence: true
+  validates :session, presence: true
+  validates :locale_key, presence: true, inclusion: { in: CODES }
 
   def build_reply(message, session)
     message == session.messages.first ? (message_code = :salutation) : (message_code = :after_salutation)
