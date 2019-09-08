@@ -1,6 +1,6 @@
 require 'rails_helper'
 context 'Getting replies' do
-  describe "Get replies from a session route - sucess", :type => :request do
+  describe "Get replies from a session route - SUCCESS", :type => :request do
     def set_host (host)
       host! host
     end

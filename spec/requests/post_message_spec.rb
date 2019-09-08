@@ -1,6 +1,6 @@
 require 'rails_helper'
 context 'Posting messages' do
-  describe "Post a Message route - sucess", :type => :request do
+  describe "Post a Message route - SUCCESS", :type => :request do
     before do
       post '/api/v1/sessions/3/messages', params: { :text => 'Ich bin ein test' }
     end
@@ -18,7 +18,7 @@ context 'Posting messages' do
     end
   end
 
-  describe "Post a Message route - sucess", :type => :request do
+  describe "Post a Message route - ERROR", :type => :request do
     before do
       post '/api/v1/sessions/3/messages', params: { :text => 'Eu falo português' }
     end
