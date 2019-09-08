@@ -31,7 +31,7 @@ class Message < ApplicationRecord
 
   def generate_token
     loop do
-      token = SecureRandom.hex(10)
+      token = SecureRandom.hex(8)
       break token unless Message.where(identifier: token).exists?
     end
   end
