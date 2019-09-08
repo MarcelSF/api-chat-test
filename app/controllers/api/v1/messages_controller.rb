@@ -15,7 +15,6 @@ class Api::V1::MessagesController < ApplicationController
       @reply.build_reply(@message, @session)
       @reply.save
       render json: @message, :status => 201
-
     else
       render :json => {error: { "code": 422,
       "message": "Unfortunately we don't have support for your language yet." }}, :status => 422
