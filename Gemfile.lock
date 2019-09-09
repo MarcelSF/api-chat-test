@@ -55,7 +55,7 @@ GEM
     byebug (11.0.1)
     case_transform (0.2)
       activesupport
-    cld (0.7.0)
+    cld (0.8.0)
       ffi
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
@@ -211,7 +211,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   bootsnap (>= 1.1.0)
   byebug
-  cld (~> 0.7.0)
+  cld (~> 0.8.0)
   database_cleaner (= 1.7.0)
   factory_bot
   factory_bot_rails
