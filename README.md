@@ -8,9 +8,9 @@ Chatbot API for Lytt. An exercise in RESTful API, Rspec testing and cloud implem
 
 * Important Gems:
 
-# This API uses the Compact Language Detection(CLD) for Ruby gem. It can quickly identify the language of a string and I used it to return the correct language code for my Message models.
+ This API uses the Compact Language Detection(CLD) for Ruby gem. It can quickly identify the language of a string and I used it to return the correct language code for my Message models.
 
-# I also used Active Model Serializers to more easily determine which information would be available in the endpoints. Should, in the future, more sensible data be added to Messages or Replies, we can easily determine what attributes should or shouldn't be sent to the front-end.
+ I also used Active Model Serializers to more easily determine which information would be available in the endpoints. Should, in the future, more sensible data be added to Messages or Replies, we can easily determine what attributes should or shouldn't be sent to the front-end.
 
 * Testing: Use 'bundle exec rspec' to run the test suite. It uses primarily Rspec, database_cleaner and factory_bot. I decided to test the model validations and the endpoints primarily. More testing could be implemented, specially with a front-end implementation.
 
