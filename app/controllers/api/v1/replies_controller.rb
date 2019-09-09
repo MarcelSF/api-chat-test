@@ -5,15 +5,8 @@ class Api::V1::RepliesController < ApplicationController
   end
 
   def create
-    reply = Reply.new(message_params)
-    session = Session.find(reply_params[:session_id])
-    if reply.save
-      serialized_data = ActiveModelSerializers::Adapter::Json.new(
-        ReplySerializer.new(reply)
-      ).serializable_hash
-      RepliesChannel.broadcast_to session, serialized_data
-      head :ok
-    end
+    @reply = Reply.new(reply_params)
+    @reply.save
   end
 
   private
@@ -21,5 +14,4 @@ class Api::V1::RepliesController < ApplicationController
   def reply_params
     params.require(:reply).permit(:identifier, :session_id)
   end
-
 end

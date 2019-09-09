@@ -1,15 +1,15 @@
 class Reply < ApplicationRecord
   REPLIES = {
     "de" => {
-      salutation: "Hallo, Wie kann ich Ihnen helfen? Ich kann Ihnen auf Deutsch, Englisch oder Spanisch helfen.",
+      salutation: "Hallo! Ich bin ein virtueller Assistent und ich bin hier, um zu helfen. Ich kann Ihnen auf Deutsch, Englisch oder Spanisch helfen.",
       after_salutation: "In Zukunft werde ich in der Lage sein, jede deiner Fragen zu beantworten"
     },
     "en" => {
-      salutation: "Hello, how can I help you? I can help you in German, English or Spanish.",
+      salutation: "Hello! I am a virtual assistant and I am here to help. I can help you in German, English or Spanish.",
       after_salutation: "In the future, I will be able to answer any of your questions"
     },
     "es" => {
-      salutation: "Hola, ¿en qué puedo ayudarle? Puedo entenderle en alemán, inglés o español.",
+      salutation: "Hola! Soy un asistente virtual y estoy aquí para ayudar. Puedo entenderle en alemán, inglés o español.",
       after_salutation: "En el futuro, podré responder cualquiera de sus preguntas"
     }
   }

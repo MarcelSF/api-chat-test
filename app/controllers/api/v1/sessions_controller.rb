@@ -6,13 +6,7 @@ class Api::V1::SessionsController < ApplicationController
 
   def create
     @session = Session.new
-    if @session.save
-      serialized_data = ActiveModelSerializers::Adapter::Json.new(
-        SessionSerializer.new(@session)
-      ).serializable_hash
-      ActionCable.server.broadcast 'sessions_channel', serialized_data
-      head :ok
-    end
+    @session.save
   end
 
   private

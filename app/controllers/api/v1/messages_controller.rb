@@ -37,14 +37,6 @@ class Api::V1::MessagesController < ApplicationController
 
   private
 
-  def broadcast_reply(message)
-    serialized_data = ActiveModelSerializers::Adapter::Json.new(
-      ReplySerializer.new(message)
-    ).serializable_hash
-    RepliesChannel.broadcast_to session, serialized_data
-    head :ok
-  end
-
   def message_params
     params.permit(:identifier, :session_id, :text)
   end
