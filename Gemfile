@@ -24,8 +24,8 @@ gem 'factory_bot'
 # Pry
 gem 'pry', '~> 0.12.2'
 
-# User authentication with Devise
-gem 'devise'
+# # User authentication with Devise
+# gem 'devise'
 
 # Serializer
 gem 'active_model_serializers', '~> 0.10.0'
