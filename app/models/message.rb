@@ -12,6 +12,7 @@ class Message < ApplicationRecord
       MessageSerializer.new(self)
     ).serializable_hash
     MessagesChannel.broadcast_to session, serialized_data
+    head :ok
   end
 
   def text_must_be_blank

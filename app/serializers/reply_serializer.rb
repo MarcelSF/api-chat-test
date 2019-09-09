@@ -1,3 +1,3 @@
 class ReplySerializer < ActiveModel::Serializer
-  attributes :message, :reply_to, :locale_key, :created_at
+  attributes :message, :session_id :reply_to, :locale_key, :created_at
 end

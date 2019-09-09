@@ -11,10 +11,19 @@ class Api::V1::MessagesController < ApplicationController
     @message.detect_language
 
     if @message.save
+      serialized_data = ActiveModelSerializers::Adapter::Json.new(
+      MessageSerializer.new(@message)
+      ).serializable_hash
+      MessagesChannel.broadcast_to @session, serialized_data
+
       @reply = Reply.new
       @reply.build_reply(@message, @session)
       @reply.save
-      render json: @message, :status => 201
+      serialized_data = ActiveModelSerializers::Adapter::Json.new(
+      ReplySerializer.new(@reply)
+      ).serializable_hash
+      MessagesChannel.broadcast_to @session, serialized_data
+      head :ok
     else
       render :json => {error: { "code": 422,
       "message": "Unfortunately we don't have support for your language yet." }}, :status => 422
@@ -34,12 +43,12 @@ class Api::V1::MessagesController < ApplicationController
       "message": "Resource doesn't exist" }}, :status => 404
     end
   end
-wuhiuwh
+
   private
 
-  def broadcast_reply(message)
+  def broadcast_reply(session)
     serialized_data = ActiveModelSerializers::Adapter::Json.new(
-      ReplySerializer.new(message)
+      ReplySerializer.new(self)
     ).serializable_hash
     RepliesChannel.broadcast_to session, serialized_data
     head :ok
