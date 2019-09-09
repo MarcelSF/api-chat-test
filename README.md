@@ -13,6 +13,14 @@ This could be done in microservices with the Serverless Framework (Node.JS and R
 
 * SETUP: After cloning the repository, just run 'bundle install', create and migrate the database (rails db:create db:migrate) and run 'rails s'. The API should be available in localhost:3000
 
+* CLOUD DELIVERY
+
+All of these endpoints can also be found on a Heroku app on:
+
+https://lytt-api-test.herokuapp.com/api/v1
+
+I chose heroku for it's simplicity of configuration, although I do understand that in terms of scaling it is not the best option due to pricing. However, for initial releases of an app, it is a reliable and very practical cloud platform.
+
 * Important Gems:
 
  This API uses the Compact Language Detection (CLD) for Ruby gem. It can quickly identify the language of a string and I used it to return the correct language code for my Message models.
@@ -67,5 +75,5 @@ Action Cable is enabled for future implementation of Web Sockets and Front-End i
 
 The next step would be to create a React App for the front-end which would, in turn, be able to show, in real time, both messages and replies to the user. Another important step would be to implement the User model and authentication with Devise (already in gem file). To improve performance,  maybe create a side job with sidekiq to handle all the replies generated for each message.
 
-Another part that should be polished is the error handling part of the API. At the moment, a lot of the code repeats itself, so a little bit of refactoring would make the code more elegant. The same goes for the testing suite, which should cover more parts of the API such as the controllers.
+Another part that should be polished is the error handling part of the API. At the moment, a lot of the code repeats itself, so a little bit of refactoring would make the code more elegant. Also, the app does not yet cover other 404 errors, such as when the user tries to access an endpoint that does not exist. The same goes for the testing suite, which should cover more parts of the API such as the controllers.
 
