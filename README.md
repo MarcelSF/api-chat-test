@@ -55,6 +55,11 @@ GET localhost:3000/api/v1/sessions/session_id/replies
 
 
 
+
+* Using the endpoints
+
+  To test the API, I sugest using a software called Postman. It manages to create HTTP requests quite easily, and is free.
+
 * Configuration
 
 This API uses Postgresql database. Redis and CORS are also setup for future ACTION CABLE implementation with a React front-end app. The Action Cable channels have already been created as well.
